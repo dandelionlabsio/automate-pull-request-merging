@@ -18,4 +18,6 @@ jobs:
           else
             echo "${{ github.actor }} has not changed his own file!!"
             exit 1
-          fi
+          fi   
+    - name: automatic merge
+      uses: KeisukeYamashita/auto-pull-request-merge@v1
