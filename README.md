@@ -1,5 +1,6 @@
 ## Automated pull request merging based on modified files
-Automatic merge if the github user modified its own file in the root directory doing a pull request
+Automatic merge if the github user modified its own file in the root directory doing a pull request.
+Find the action yml file at `.github/workflows`.
 
 ### How it works?
 - Checks if the github pull request proposed modified its own file in the root directory.
