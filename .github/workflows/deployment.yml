@@ -18,6 +18,8 @@ jobs:
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           if echo $FILES | grep -q "leonacostaok.json"; then
             echo "leonacostaok json file changed!!"
+            console.log("leonacostaok json file changed!!")
           else
             echo "leonacostaok no json file changed!!"
+            console.log("not json file changed!!")
           fi
