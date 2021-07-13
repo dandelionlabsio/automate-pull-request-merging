@@ -10,7 +10,7 @@ Find the action yml file at `.github/workflows`.
 - Then merges the pull request if it matches.
 
 ### When it fails?
-- Fails if the file is different.
+- Fails if the filename is different than `${username}.json`.
 - Fails if more than one file is commited in the same pull request.
 
 ### What if I cannot make it work?
