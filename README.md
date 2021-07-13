@@ -9,3 +9,6 @@ Automatic merge if the github user modified its own file in the root directory d
 ### When it fails?
 - Fails if the file is different.
 - Fails if more than one file is commited in the same pull request.
+
+### What if I cannot make it work?
+- Contact me at leon@dandelionlabs.io
