@@ -1,15 +1,9 @@
-on: pull_request
-
-jobs:
-  welcome:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v4
-        with:
-          script: |
-            // Get a list of all issues created by the PR opener
-            const creator = context.payload.sender.login
-            const pullRequest = github.issues(context.issue.number)
-            console.log(pullRequest)
-              //issue_number: context.issue.number,
-              //owner: context.repo.owner,
+- id: changes
+        run: |
+          URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          if echo $FILES | grep -q "leonacostaok.json"; then
+            echo "json file changed!!"
+          else
+            echo "no json file changed!!"
+          fi
