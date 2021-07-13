@@ -30,4 +30,3 @@ jobs:
           MERGE_COMMIT_MESSAGE: "Automatic merge"
           MERGE_RETRIES: "2"
           MERGE_RETRY_SLEEP: "10000"
-          PULL_REQUEST: "1234"
