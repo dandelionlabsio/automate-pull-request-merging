@@ -1,0 +1,23 @@
+name: deployment
+
+on: pull_request
+
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@v1
+
+    - name: get list of files in PR
+      if: github.event.pull_request.merged
+      run: |
+          URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          if echo $FILES | grep -q "leonacostaok.json"; then
+            echo "leonacostaok json file changed!!"
+          else
+            echo "leonacostaok no json file changed!!"
+          fi
