@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: get list of files in PR
+    - name: check if user changed its own file
       if: github.event.pull_request.merged == false
       run: |
           URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
@@ -17,4 +17,5 @@ jobs:
             echo "${{ github.actor }} has changed his own file!!"
           else
             echo "${{ github.actor }} has not changed his own file!!"
+            exit 1
           fi
