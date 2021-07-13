@@ -1,12 +1,15 @@
 on: pull_request
 
 jobs:
-  diff:
+  welcome:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v4
         with:
           script: |
-            const diff_url = context.payload.pull_request.diff_url
-            const result = await github.request(diff_url)
-            console.log(result)
+            // Get a list of all issues created by the PR opener
+            const creator = context.payload.sender.login
+            const pullRequest = github.issues(context.issue.number)
+            console.log(pullRequest)
+              //issue_number: context.issue.number,
+              //owner: context.repo.owner,
