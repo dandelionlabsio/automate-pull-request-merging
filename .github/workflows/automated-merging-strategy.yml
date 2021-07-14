@@ -7,25 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: check if user changed its own file
-      if: github.event.pull_request.merged == false && ${{ github.ref == 'refs/heads/main' }}
+      if: github.event.pull_request.merged == false
       run: |
           URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES == "${{ github.actor }}.json"
           if [ "$FILES" = "${{ github.actor }}.json" ]; then
             echo "${{ github.actor }} has changed his own file!!"
-            $INNOCENT = true
           else
             echo "${{ github.actor }} has not changed his own file!!"
-            $INNOCENT = false
+            exit 1
           fi  
     - name: automatic merge
-      if: ${{ INNOCENT }}
       uses: KeisukeYamashita/auto-pull-request-merge@v1
       with:
         comment: "Accepted."
-    - name: Close Pull Request
-      if: ${{ !INNOCENT }}
-      uses: superbrothers/close-pull-request@v3.0.0
-      with:
-        comment: "Rejected: A github user can only modify its own file."
