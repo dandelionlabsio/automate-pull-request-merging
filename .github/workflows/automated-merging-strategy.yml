@@ -20,5 +20,3 @@ jobs:
           fi  
     - name: automatic merge
       uses: KeisukeYamashita/auto-pull-request-merge@v1
-      with:
-        comment: "Accepted."
