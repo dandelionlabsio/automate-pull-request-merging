@@ -20,6 +20,8 @@ jobs:
           fi  
     - name: automatic merge
       uses: KeisukeYamashita/auto-pull-request-merge@v1
+      with:
+        timeoutSeconds: 180
     - name: delete-merged-action
       uses: PabioHQ/delete-merged-action@v1.2.4
       with:
