@@ -25,4 +25,4 @@ jobs:
     - name: delete-merged-action
       uses: PabioHQ/delete-merged-action@v1.2.4
       with:
-        branches: "${{ github.event.pull_request.head.ref }}
+        branches: "${{ github.event.pull_request.head.ref }}"
