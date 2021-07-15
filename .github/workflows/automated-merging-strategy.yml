@@ -14,19 +14,8 @@ jobs:
           echo $FILES == "${{ github.event.pull_request.user.login }}.json"
           if [ "$FILES" = "${{ github.event.pull_request.user.login }}.json" ]; then
             echo "${{ github.event.pull_request.user.login }} has changed his own file!!"
+            exit 0
           else
             echo "${{ github.event.pull_request.user.login }} has not changed his own file!!"
             exit 1
           fi
-    - name: automatic approve if it is a new contributor
-      uses: hmarr/auto-approve-action@v2.1.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: automatic merge if everything alright
-      uses: KeisukeYamashita/auto-pull-request-merge@v1
-    - name: delete-merged-action
-      uses: PabioHQ/delete-merged-action@v1.2.4
-      with:
-        branches: "${{ github.event.pull_request.head.ref }}"
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
