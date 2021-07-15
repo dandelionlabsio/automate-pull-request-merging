@@ -1,10 +1,11 @@
-name: automated-merging-strategy
+name: deployment
 
 on: pull_request
 
 jobs:
   welcome:
     runs-on: ubuntu-latest
+
     steps:
     - name: check if user changed its own file
       if: github.event.pull_request.merged == false
@@ -13,16 +14,10 @@ jobs:
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES == "${{ github.event.pull_request.user.login }}.json"
           if [ "$FILES" = "${{ github.event.pull_request.user.login }}.json" ]; then
-            echo "${{ github.event.pull_request.user.login }} has changed his own file!!"
+            echo "${{ github.actor }} has changed his own file!!"
           else
-            echo "${{ github.event.pull_request.user.login }} has not changed his own file!!"
+            echo "${{ github.actor }} has not changed his own file!!"
             exit 1
-          fi  
+          fi   
     - name: automatic merge
       uses: KeisukeYamashita/auto-pull-request-merge@v1
-      with:
-        timeoutSeconds: 180
-    - name: delete-merged-action
-      uses: PabioHQ/delete-merged-action@v1.2.4
-      with:
-        branches: "${{ github.event.pull_request.head.ref }}"
